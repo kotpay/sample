@@ -2,15 +2,15 @@
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xsi:schemaLocation="https://github.com/qoomon/maven-git-versioning-extension https://qoomon.github.io/maven-git-versioning-extension/configuration-7.0.0.xsd">
 
-    <refs considerTagsOnBranches="true">
-        <ref type="tag">
-            <pattern><![CDATA[(?<version>.+)]]></pattern>
-            <version>${ref.version}</version>
+    <refs>
+        <ref type="branch">
+            <pattern><![CDATA[release/(?<version>.+)]]></pattern>
+            <version>${ref.version}.${commit.timestamp}</version>
         </ref>
 
         <ref type="branch">
-            <pattern><![CDATA[.+?/(?<feature>.+)]]></pattern>
-            <version>${ref.feature}-${commit.timestamp}</version>
+            <pattern><![CDATA[.+?/(?<version>.+)]]></pattern>
+            <version>${ref.version}-${commit.timestamp}</version>
         </ref>
 
         <ref type="branch">
