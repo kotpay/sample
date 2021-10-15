@@ -1,6 +1,7 @@
-on: create
+name: Create
+on: [ create ]
 jobs:
-  deploy-release-version:
+  Deploy-Release-Version:
     runs-on: ubuntu-latest
     if: {{startsWith($GITHUB_REF, 'refs/tags/')}}
     steps:
