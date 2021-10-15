@@ -5,11 +5,16 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ startsWith( github.ref , 'refs/heads/release') }}
     steps:
-      - name: Bump version and push tag
-        uses: mathieudutour/github-tag-action@v5.6
+      - uses: actions/checkout@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          tag_prefix: ${{ github.ref }}
+          fetch-depth: '0'
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          TAG_CONTEXT: 'branch'
+          INITIAL_VERSION: ${{ github.ref }}
   Deploy-Snapshot-Version:
     runs-on: ubuntu-latest
     if: ${{ ! startsWith( github.ref , 'refs/heads/release') }}
