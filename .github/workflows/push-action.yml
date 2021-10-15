@@ -18,13 +18,27 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RELEASE_BRANCHES: 'release.*'
-          WITH_V: true
+          WITH_V: false
           TAG_CONTEXT: 'branch'
           INITIAL_VERSION: ${{ steps.initial-release.outputs.result }}
           DEFAULT_BUMP: 'patch'
   Deploy-Snapshot-Version:
     runs-on: ubuntu-latest
     if: ${{ ! startsWith( github.ref , 'refs/heads/release') }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+          cache: 'maven'
+      - name: Build with Maven
+        run: mvn -B deploy --file pom.xml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  Deploy-Release-Version:
+    runs-on: ubuntu-latest
+    if: ${{ startsWith( github.ref , 'refs/tags/') }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v2
