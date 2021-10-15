@@ -3,7 +3,7 @@ on: [ push ]
 jobs:
   Create-Release-Tag:
     runs-on: ubuntu-latest
-    if: startsWith(${{ github.ref }}, 'refs/heads/release-')
+    if: ${{ startsWith( github.ref , 'refs/heads/release-') }}
     steps:
       - name: Bump version and push tag
         uses: mathieudutour/github-tag-action@v5.6
@@ -12,7 +12,7 @@ jobs:
           tag_prefix: ${{ github.ref }}
   Deploy-Snapshot-Version:
     runs-on: ubuntu-latest
-    if: ! startsWith(${{ github.ref }}, 'refs/heads/release-')
+    if: ${{ ! startsWith( github.ref , 'refs/heads/release-') }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v2
