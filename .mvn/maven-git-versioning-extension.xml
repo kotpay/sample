@@ -10,12 +10,12 @@
 
         <ref type="branch">
             <pattern><![CDATA[.+?/(?<feature>.+)]]></pattern>
-            <version>${ref.feature}</version>
+            <version>${ref.feature}-${commit.timestamp}</version>
         </ref>
 
         <ref type="branch">
             <pattern>(?:master|main)</pattern>
-            <version>master</version>
+            <version>master-${commit.timestamp}</version>
         </ref>
     </refs>
 
