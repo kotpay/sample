@@ -32,7 +32,7 @@ jobs:
         run: mvn -B deploy --file pom.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REF: ${{ 'refs/tags/' + steps.github-tag-action.outputs.new_tag }}
+          GITHUB_REF: ${{ format( '{0}{1}', 'refs/tags/', steps.github-tag-action.outputs.new_tag ) }}
   Deploy-Snapshot-Version:
     runs-on: ubuntu-latest
     if: ${{ ! startsWith( github.ref , 'refs/heads/release') }}
