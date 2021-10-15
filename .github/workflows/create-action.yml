@@ -3,7 +3,7 @@ on: [ create ]
 jobs:
   Deploy-Release-Version:
     runs-on: ubuntu-latest
-    if: {{startsWith($GITHUB_REF, 'refs/tags/')}}
+    if: startsWith($GITHUB_REF, 'refs/tags/')
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v2
