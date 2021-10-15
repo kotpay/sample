@@ -21,6 +21,7 @@ jobs:
           WITH_V: true
           TAG_CONTEXT: 'branch'
           INITIAL_VERSION: ${{ steps.initial-release.outputs.result }}
+          DEFAULT_BUMP: 'patch'
   Deploy-Snapshot-Version:
     runs-on: ubuntu-latest
     if: ${{ ! startsWith( github.ref , 'refs/heads/release') }}
