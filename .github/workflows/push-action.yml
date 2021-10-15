@@ -5,6 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ startsWith( github.ref , 'refs/heads/release') }}
     steps:
+      - uses: actions/github-script@v5.0.0
+        id: initial-release
+        with:
+          script: return context.ref.substring(context.ref.indexOf("release/") + 8) + ".0"
+          result-encoding: string
       - uses: actions/checkout@v2
         with:
           fetch-depth: '0'
@@ -12,9 +17,10 @@ jobs:
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_BRANCHES: 'release.*'
           WITH_V: true
           TAG_CONTEXT: 'branch'
-          INITIAL_VERSION: ${{ github.ref }}
+          INITIAL_VERSION: ${{ steps.initial-release.outputs.result }}
   Deploy-Snapshot-Version:
     runs-on: ubuntu-latest
     if: ${{ ! startsWith( github.ref , 'refs/heads/release') }}
