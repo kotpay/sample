@@ -7,11 +7,13 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Primary
 
 @Configuration
-class ObjectMapperConfig {
+class DefaultObjectMapperConfig {
     @Bean
-    fun springObjectMapper(): ObjectMapper = ObjectMapper()
+    @Primary
+    fun defaultObjectMapper(): ObjectMapper = ObjectMapper()
         .registerModule(JavaTimeModule())
         .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
         .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
