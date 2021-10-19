@@ -82,7 +82,7 @@
         <dependency>
             <groupId>com.github.kotpay</groupId>
             <artifactId>api</artifactId>
-            <version>master-1634627761</version>
+            <version>master-1634632565</version>
         </dependency>
 
         <!--MISC-->
@@ -162,6 +162,20 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/kotpay/repo</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2</url>
+        </repository>
+    </repositories>
 
     <distributionManagement>
         <repository>
