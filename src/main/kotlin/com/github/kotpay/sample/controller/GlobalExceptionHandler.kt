@@ -1,7 +1,7 @@
 package com.github.kotpay.sample.controller
 
-import com.github.kotpay.sample.dto.ErrorHolder
-import com.github.kotpay.sample.dto.ErrorResponse
+import com.github.kotpay.api.dto.ErrorHolder
+import com.github.kotpay.api.dto.ErrorResponse
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
