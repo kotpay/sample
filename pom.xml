@@ -82,7 +82,7 @@
         <dependency>
             <groupId>com.github.kotpay</groupId>
             <artifactId>api</artifactId>
-            <version>master-1634627761</version>
+            <version>master-1634632565</version>
         </dependency>
 
         <!--MISC-->
