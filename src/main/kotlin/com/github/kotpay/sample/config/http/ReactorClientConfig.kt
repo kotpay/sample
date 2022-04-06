@@ -26,6 +26,7 @@ class ReactorClientConfig(private val sslContext: SSLContext) : ClientConfig {
             ClientAuth.NONE, null, false
         )
 
-    private fun defaultHttpClient(defaultSslContext: SslContext): HttpClient =
-        HttpClient.create().secure { it.sslContext(defaultSslContext) }
+    private fun defaultHttpClient(defaultSslContext: SslContext): HttpClient {
+        return HttpClient.create().secure { it.sslContext(defaultSslContext) }
+    }
 }

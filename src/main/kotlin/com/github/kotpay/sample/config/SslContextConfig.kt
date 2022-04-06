@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.Resource
 import java.security.KeyStore
+import javax.net.ssl.HostnameVerifier
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.TrustManagerFactory
@@ -23,7 +24,7 @@ class SslContextConfig {
     ): SSLContext {
         val keyStore = KeyStore.getInstance(truststoreType)
         keyStore.load(truststoreResource.inputStream, truststorePassword.toCharArray())
-        val sslContext = SSLContext.getInstance("TLS")
+        val sslContext = SSLContext.getInstance("TLSv1.2")
         sslContext.init(null, loadTrustMaterial(keyStore), null)
         return sslContext
     }
@@ -37,4 +38,8 @@ class SslContextConfig {
     @Bean
     @ConditionalOnMissingBean(SSLContext::class)
     fun jdkSslContext(): SSLContext = SSLContext.getDefault()
+
+    @Bean
+    @ConditionalOnProperty("http.hostname.verify.disabled", havingValue = "true")
+    fun disabledHostnameVerifier(): HostnameVerifier = HostnameVerifier { _, _ -> true }
 }
